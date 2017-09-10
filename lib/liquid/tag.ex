@@ -6,8 +6,8 @@ defmodule Liquid.Tag do
     %Liquid.Tag{name: name |> String.to_atom, markup: rest}
   end
 
-  def create({name, rest}) do
-    %Liquid.Tag{name: name |> to_string |> String.to_atom, markup: rest}
+  def create(name, arguments) do
+    %Liquid.Tag{name: name, markup: arguments}
   end
 
   def create(nil), do: nil

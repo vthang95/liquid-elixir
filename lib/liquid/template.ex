@@ -28,7 +28,8 @@ defmodule Liquid.Template do
 
   def render(%Template{} = t, %Context{} = context, options) do
     registers = Keyword.get(options, :registers, %{})
-    context = %{context | registers: registers}
+    version = Keyword.get(options, :version, 1)
+    context = %{context | registers: registers, version: version}
     render(t, context)
   end
 
@@ -54,6 +55,10 @@ defmodule Liquid.Template do
   @spec parse(nil, map) :: Liquid.Template
   def parse(nil, presets) do
     Liquid.Parse.parse("", %Template{presets: presets})
+  end
+
+  def parse_new(ast, %{} = presets \\ %{}) when is_list(ast) do
+    Liquid.Parse.parse_new(ast, %Template{presets: presets})
   end
 
 end

@@ -68,7 +68,7 @@ defmodule BasicBench do
     </html>
     """
     t = Template.parse(markup)
-    { :ok, _rendered, _ } = Template.render(t, assigns)
+#    { :ok, _rendered, _ } = Template.render(t, assigns)
   end
 
   bench "big template parsing performance test with lexer" do
@@ -101,13 +101,15 @@ defmodule BasicBench do
   bench "old liquid full render" do
     markup = "simple variable {{ hallo }}"
     t = Template.parse(markup)
-    { :ok, _rendered, _ } = Template.render(t)
+    { :ok, _rendered, _ } = Template.render(t,%{"hallo" => "hoi iedereen"})
   end
 
   bench "lexer parse most simplest item" do
     markup = "simple variable {{ hallo }}"
     {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
-    :liquid_parser.parse(lex)
+    {:ok, ast} = :liquid_parser.parse(lex)
+    template = Liquid.Template.parse_new(ast |> hd())
+    Liquid.Template.render(template, %{"hallo" => "hoi iedereen"}, version: 2)
   end
 
 end

@@ -15,8 +15,8 @@ elements -> element           : ['$1'].
 elements -> element elements  : '$1' ++ '$2'.
 
 element -> object   : ['Elixir.Liquid.Variable':create('$1')].
-element -> tags     : ['Elixir.Liquid.Tag':create('$1')].
-element -> strings  : '$1'.
+element -> tags     : ['Elixir.Liquid.Node':create('$1')].
+element -> strings  : [{string, '$1'}].
 
 tags -> '{%' maybe_whitespace cleaned_string maybe_whitespace '%}' : {get_name('$3'), get_rest('$3')}.
 tags -> '{%' maybe_whitespace cleaned_string maybe_whitespace strings '%}' : {get_name('$3'), get_rest('$3') ++ trim('$5')}.
