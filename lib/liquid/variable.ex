@@ -17,6 +17,15 @@ defmodule Liquid.Variable do
     Map.merge(variable, parsed)
   end
 
+  def create({name, filters}) do
+    name = name |> to_string
+    variable = %Liquid.Variable{name: name, filters: filters}
+    parsed = Liquid.Appointer.parse_name(name)
+    Map.merge(variable, parsed)
+  end
+
+  def create(nil), do: nil
+
   @doc """
   Assigns context to variable and than applies all filters
   """
