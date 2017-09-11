@@ -58,7 +58,7 @@ defmodule Liquid.Template do
   end
 
   def parse_new(ast, %{} = presets \\ %{}) when is_list(ast) do
-    Liquid.Parse.parse_new(ast, %Template{presets: presets})
+    Liquid.Parse.parse_new(List.flatten(ast), %Template{presets: presets})
   end
 
 end

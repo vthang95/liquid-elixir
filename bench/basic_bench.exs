@@ -2,7 +2,7 @@ defmodule BasicBench do
   use Benchfella
   alias Liquid.{Template, Tag}
 
-  @list Enum.to_list(1..1000)
+  @list Enum.to_list(1..100000)
 
   defmodule MyFilter do
     def meaning_of_life(_), do: 42
@@ -42,6 +42,15 @@ defmodule BasicBench do
     { :ok, _rendered, _ } = Template.render(t, assigns)
   end
 
+  bench "Loop list lexer" do
+    assigns = %{"array" => @list}
+    markup = "{%for item in array %}{{item}}{%endfor%}"
+    {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
+    {:ok, ast} = :liquid_parser.parse(lex)
+    template = Liquid.Template.parse_new(ast)
+    { :ok, _rendered, _ } = Template.render(template, assigns, version: 2)
+  end
+
   bench "Loop custom filters and tags list" do
     assigns = %{"array" => @list}
     markup = "{%for item in array %}{%minus_one 3%}{{item | plus_one }}{%endfor%}"
@@ -68,7 +77,7 @@ defmodule BasicBench do
     </html>
     """
     t = Template.parse(markup)
-#    { :ok, _rendered, _ } = Template.render(t, assigns)
+    { :ok, _rendered, _ } = Template.render(t, assigns)
   end
 
   bench "big template parsing performance test with lexer" do
@@ -90,7 +99,9 @@ defmodule BasicBench do
     </html>
     """
     {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
-    :liquid_parser.parse(lex)
+    {:ok, ast} = :liquid_parser.parse(lex)
+    template = Liquid.Template.parse_new(ast)
+    Liquid.Template.render(template, %{"array" => @list}, version: 2)
   end
 
   bench "old liquid render just parse" do
@@ -108,7 +119,7 @@ defmodule BasicBench do
     markup = "simple variable {{ hallo }}"
     {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
     {:ok, ast} = :liquid_parser.parse(lex)
-    template = Liquid.Template.parse_new(ast |> hd())
+    template = Liquid.Template.parse_new(ast)
     Liquid.Template.render(template, %{"hallo" => "hoi iedereen"}, version: 2)
   end
 

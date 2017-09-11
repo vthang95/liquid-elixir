@@ -11,7 +11,7 @@ defmodule Liquid.Block do
 
   def create(name, arguments, options) do
     end_marker = Keyword.get(options, :end_marker, false)
-    %Block{name: name, markup: arguments, end_marker: end_marker}
+    %Block{name: name, markup: arguments |> to_string(), end_marker: end_marker}
   end
 
   def split(nodes), do: split(nodes, [:else])

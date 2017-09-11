@@ -1,5 +1,5 @@
 defmodule Liquid.Tag do
-  defstruct name: nil, markup: nil, parts: [], attributes: [], blank: false
+  defstruct name: nil, markup: nil, parts: [], attributes: [], blank: false, end_marker: false
 
   def create(markup) when is_binary(markup) do
     destructure [name, rest], String.split(markup, " ", parts: 2)

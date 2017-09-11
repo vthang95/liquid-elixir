@@ -37,12 +37,12 @@ defmodule Liquid.Parse do
     end
   end
 
-  def parse_new(%Block{name: name}, [], _, _) do
+  def parse_new(%Block{name: name, end_marker: false}, [], _, _) do
     raise "No matching end for block {% #{to_string(name)} %}"
   end
 
   def parse_new(%Block{name: name}=block, [h|t], accum, %Template{}=template) do
-    case block do
+    case h do
       %Block{end_marker: true} ->
         { %{ block | nodelist: accum }, t, template }
       _ ->
@@ -56,22 +56,31 @@ defmodule Liquid.Parse do
       %Variable{} ->
         { head, tail, template }
       %type{} when type in [Tag, Block] ->
-        parse_markup_new(head, tail, template)
+        parse_struct_node_new(head, tail, template)
       value -> { head, tail, template }
     end
   end
 
-  defp parse_markup_new(markup, rest, template) do
-    name = markup |> String.split(" ") |> hd
+  defp parse_struct_node_new(%{name: name} = head, tail, %Template{} = template) do
     case Registers.lookup(name) do
       { mod, Liquid.Block } ->
-        parse_block(mod, markup, rest, template)
+        parse_block_new(mod, head, tail, template)
       { mod, Liquid.Tag } ->
-        tag = Liquid.Tag.create(markup)
+        tag = Liquid.Tag.create(head)
         { tag, template } = mod.parse(tag, template)
-        { tag, rest, template }
+        { tag, tail, template }
       nil -> raise "unregistered tag: #{name}"
     end
+  end
+
+  defp parse_block_new(mod, head, rest, template) do
+    { head, rest, template } = try do
+      mod.parse(head, rest, [], template)
+    rescue
+      UndefinedFunctionError -> parse_new(head, rest, [], template)
+    end
+    { head, template } = mod.parse(head, template)
+    { head, rest, template }
   end
 
   def parse("", %Template{}=template) do

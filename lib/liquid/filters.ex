@@ -481,6 +481,7 @@ defmodule Liquid.Filters do
   def filter([], value), do: value
   def filter([filter|rest], value) do
     [name, args] = filter
+
     args = for arg <- args do
       Liquid.quote_matcher |> Regex.replace(arg, "")
     end

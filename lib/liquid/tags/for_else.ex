@@ -91,10 +91,10 @@ defmodule Liquid.ForElse do
     end)
   end
 
-  def render(output, %Block{iterator: it}=block, %Context{}=context) do
+  def render(output, %Block{iterator: it} = block, %Context{version: 2} = context) do
     list = parse_collection(it.collection, context)
     list = if is_binary(list) and list != "", do: [list], else: list
-    if is_list(list) and Enum.count(list) > 0 do
+    if is_list(list) and !is_empty_list(list) do
       list = if it.reversed, do: Enum.reverse(list), else: list
       limit  = lookup_limit(it, context)
       offset = lookup_offset(it, context)
@@ -103,6 +103,23 @@ defmodule Liquid.ForElse do
       Render.render(output, block.elselist, context)
     end
   end
+
+  def render(output, %Block{iterator: it}=block, %Context{}=context) do
+    list = parse_collection(it.collection, context)
+    list = if is_binary(list) and list != "", do: [list], else: list
+    if is_list(list) and !is_empty_list(list) do
+      list = if it.reversed, do: Enum.reverse(list), else: list
+      limit  = lookup_limit(it, context)
+      offset = lookup_offset(it, context)
+      each(output, [make_ref(), limit,offset], list, block, context)
+    else
+      Render.render(output, block.elselist, context)
+    end
+  end
+
+  defp is_empty_list([]), do: true
+  defp is_empty_list(value) when is_list(value), do: false
+  defp is_empty_list(_value), do: false
 
   defp parse_collection(list, _context) when is_list(list), do: list
   defp parse_collection(%Variable{} = variable, context) do
@@ -172,7 +189,7 @@ defmodule Liquid.ForElse do
   end
 
   defp next_forloop(%Iterator{forloop: loop}=it, _count) do
-    %{"name" => it.item <> "-" <> it.name,
+    %{"name" => loop["name"],
     "index" => loop["index"]  + 1,
      "index0" => loop["index0"] + 1,
      "rindex" => loop["rindex"]  - 1,
