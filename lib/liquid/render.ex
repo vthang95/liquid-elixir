@@ -29,7 +29,7 @@ defmodule Liquid.Render do
   end
 
   def render(output, {:string, char_list}, %Context{} = context) do
-    { [char_list|output] , context }
+    { [char_list |> :erlang.list_to_binary()|output] , context }
   end
 
   def render(output, text, %Context{}=context) when is_binary(text) do
@@ -37,7 +37,7 @@ defmodule Liquid.Render do
   end
 
   def render(output, %Variable{}=v, %Context{}=context) do
-    rendered = Variable.lookup(v, context)
+    rendered = Variable.lookup(v, context) |> join_list
     { [rendered|output], context }
   end
 
