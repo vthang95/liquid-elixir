@@ -144,22 +144,25 @@ defmodule Liquid.ForElse do
     each(output, [h, limit, offset], t, block, %{context | assigns: block_context.assigns, registers: block_context.registers})
   end
 
-  defp render_content(output, %Block{iterator: it}=block, context, [limit, offset]) do
-    case {should_render?(limit, offset, it.forloop["index"]), block.blank} do
+  defp render_content(output, %Block{iterator: %{forloop: %{"index" => index}}, nodelist: nodelist, blank: blank}=block, context, [limit, offset]) do
+    case {should_render?(limit, offset, index), blank} do
       {true, true} ->
-        { _, new_context } = Render.render([], block.nodelist, context)
+        { _, new_context } = Render.render([], nodelist, context)
         { output, new_context }
       {true, _ } ->
-        Render.render(output, block.nodelist, context)
+        Render.render(output, nodelist, context)
       _ ->
         { output, context }
     end
   end
 
-  defp remember_limit(%Block{iterator: it}, context) do
+  defp remember_limit(%Block{iterator: %{name: name} = it}, %{offsets: offsets} = context) do
     limit = lookup_limit(it, context) || 0
-    remembered = context.offsets[it.name] || 0
-    %{ context | offsets: context.offsets |> Map.put(it.name, remembered + limit) }
+    remembered = case Map.fetch(offsets, name) do
+      {:ok, value} -> value
+      :error -> 0
+    end
+    %{ context | offsets: offsets |> Map.put(name, remembered + limit) }
   end
 
   defp should_render?(_limit, offset, index) when index <= offset, do: false
@@ -170,8 +173,12 @@ defmodule Liquid.ForElse do
   defp lookup_limit(%Iterator{limit: limit}, %Context{}=context),
    do: Variable.lookup(limit, context)
 
-  defp lookup_offset(%Iterator{offset: %Variable{name: "continue"}}=it, %Context{}=context),
-   do: context.offsets[it.name] || 0
+  defp lookup_offset(%Iterator{offset: %Variable{name: "continue"}, name: name}=it, %Context{offsets: offsets}=context) do
+   case Map.fetch(offsets, name) do
+     {:ok, value} -> value
+     :error -> 0
+   end
+  end
 
   defp lookup_offset(%Iterator{offset: offset}, %Context{}=context),
    do: Variable.lookup(offset, context)
