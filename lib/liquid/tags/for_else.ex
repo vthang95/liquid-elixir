@@ -158,10 +158,7 @@ defmodule Liquid.ForElse do
 
   defp remember_limit(%Block{iterator: %{name: name} = it}, %{offsets: offsets} = context) do
     limit = lookup_limit(it, context) || 0
-    remembered = case Map.fetch(offsets, name) do
-      {:ok, value} -> value
-      :error -> 0
-    end
+    remembered = Map.get(offsets, name, 0)
     %{ context | offsets: offsets |> Map.put(name, remembered + limit) }
   end
 
@@ -174,10 +171,7 @@ defmodule Liquid.ForElse do
    do: Variable.lookup(limit, context)
 
   defp lookup_offset(%Iterator{offset: %Variable{name: "continue"}, name: name}=it, %Context{offsets: offsets}=context) do
-   case Map.fetch(offsets, name) do
-     {:ok, value} -> value
-     :error -> 0
-   end
+    Map.get(offsets, name, 0)
   end
 
   defp lookup_offset(%Iterator{offset: offset}, %Context{}=context),
