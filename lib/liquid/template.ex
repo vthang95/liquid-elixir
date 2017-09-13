@@ -26,7 +26,7 @@ defmodule Liquid.Template do
     raise Liquid.SyntaxError, message: "You can use only maps/structs to hold context data"
   end
 
-  def render(%Template{} = t, %Context{} = context, options) do
+  def render(%Template{} = t, %Context{global_filter: global_filter} = context, options) do
     registers = Keyword.get(options, :registers, %{})
     version = Keyword.get(options, :version, 1)
     context = %{context | registers: registers, version: version}
@@ -38,7 +38,7 @@ defmodule Liquid.Template do
     context = case {Map.has_key?(assigns,"global_filter"), Map.has_key?(assigns,:global_filter)} do
       {true,_} -> %{context|global_filter: Map.fetch!(assigns, "global_filter")}
       {_,true} -> %{context|global_filter: Map.fetch!(assigns, :global_filter)}
-      _ -> context
+      _ -> %{context| global_filter: Application.get_env(:liquid, :global_filter)}
     end
     render(t, context, options)
   end
