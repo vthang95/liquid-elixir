@@ -5,10 +5,10 @@ defmodule Liquid.Tag do
     destructure [name, rest], String.split(markup, " ", parts: 2)
     %Liquid.Tag{name: name |> String.to_atom, markup: rest}
   end
+  def create(nil), do: nil
 
   def create(name, arguments) do
     %Liquid.Tag{name: name, markup: arguments}
   end
 
-  def create(nil), do: nil
 end

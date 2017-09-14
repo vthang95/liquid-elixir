@@ -26,6 +26,7 @@ end
 
 defimpl Liquid.Matcher, for: Map do
 
+  def match(current, key) when is_binary(key), do: Map.get(current, key)
   def match(current, []), do: current
 
   def match(current, ["size"|_]), do: current |> map_size
@@ -39,7 +40,6 @@ defimpl Liquid.Matcher, for: Map do
     current |> Liquid.Matcher.match(name) |> Liquid.Matcher.match(parts)
   end
 
-  def match(current, key) when is_binary(key), do: current[key]
 end
 
 
@@ -85,5 +85,5 @@ defimpl Liquid.Matcher, for: Any do
   @doc """
   Matches all remaining cases
   """
-  def match(_current, key) when is_binary(key), do: nil # !is_list(current)
+  def match(_current, key) when is_binary(key), do: nil
 end

@@ -122,5 +122,4 @@ defmodule BasicBench do
     template = Liquid.Template.parse_new(ast)
     Liquid.Template.render(template, %{"hallo" => "hoi iedereen"}, version: 2)
   end
-
 end

@@ -41,7 +41,7 @@ defmodule Liquid.Parse do
     raise "No matching end for block {% #{to_string(name)} %}"
   end
 
-  def parse_new(%Block{name: name}=block, [h|t], accum, %Template{}=template) do
+  def parse_new(%Block{} = block, [h|t], accum, %Template{}=template) do
     case h do
       %Block{end_marker: true} ->
         { %{ block | nodelist: accum }, t, template }
@@ -57,7 +57,7 @@ defmodule Liquid.Parse do
         { head, tail, template }
       %type{} when type in [Tag, Block] ->
         parse_struct_node_new(head, tail, template)
-      value -> { head, tail, template }
+      _ -> { head, tail, template }
     end
   end
 

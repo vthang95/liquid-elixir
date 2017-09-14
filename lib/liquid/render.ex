@@ -20,7 +20,7 @@ defmodule Liquid.Render do
     { output, context }
   end
 
-  def render(output, [h|t] = list, %Context{}=context) do
+  def render(output, [h|t], %Context{}=context) do
     { output, context } = render(output, h, context)
     case context do
       %Context{extended: false, break: false, continue: false} -> render(output, t, context)
@@ -42,12 +42,12 @@ defmodule Liquid.Render do
   end
 
   def render(output, %Tag{name: name}=tag, %Context{}=context) do
-    { mod, Tag } = Registers.lookup(name)
+    { mod, Tag } = Registers.lookup(name, context)
     mod.render(output, tag, context)
   end
 
   def render(output, %Block{name: name}=block, %Context{}=context) do
-    case Registers.lookup(name) do
+    case Registers.lookup(name, context) do
       { mod, Block } -> mod.render(output, block, context)
       nil ->
         render(output, block.nodelist, context)
