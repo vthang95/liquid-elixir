@@ -3,7 +3,7 @@ defmodule Liquid.Mixfile do
 
   def project do
     [ app: :liquid,
-      version: "0.7.0",
+      version: "0.8.0",
       elixir: "~> 1.3",
       deps: deps(),
       name: "Liquid",
@@ -35,7 +35,7 @@ defmodule Liquid.Mixfile do
 
   defp package do
     [
-      files: ["lib", "README*", "mix.exs"],
+      files: ["lib", "README*", "mix.exs", "src"],
       maintainers: ["Peter Arentsen"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/nulian/liquid-elixir"}
