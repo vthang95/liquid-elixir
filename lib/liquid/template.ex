@@ -48,17 +48,18 @@ defmodule Liquid.Template do
   """
   @spec parse(String.t, map) :: Liquid.Template
   def parse(value, presets \\ %{})
-  def parse(<<markup::binary>>, presets) do
-    Liquid.Parse.parse(markup, %Template{presets: presets})
+
+  def parse(value, presets) do
+    {:ok, lex, _} = :liquid_lexer.string(value |> String.to_charlist())
+    {:ok, ast} = :liquid_parser.parse(lex)
+    ast
+    |> Enum.reverse()
+    |> List.flatten()
+    |> Liquid.Parse.parse_new(%Template{presets: presets})
   end
 
   @spec parse(nil, map) :: Liquid.Template
   def parse(nil, presets) do
     Liquid.Parse.parse("", %Template{presets: presets})
   end
-
-  def parse_new(ast, %{} = presets \\ %{}) when is_list(ast) do
-    Liquid.Parse.parse_new(List.flatten(ast), %Template{presets: presets})
-  end
-
 end

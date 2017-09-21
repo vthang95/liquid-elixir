@@ -13,6 +13,7 @@ defmodule Liquid.Node do
   end
 
   def create(name, arguments, options) do
+    arguments = arguments |> to_string |> String.trim()
     case Registers.lookup(name) do
       {_mod, Block} ->
         Block.create(name, arguments, options)

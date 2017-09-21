@@ -17,13 +17,13 @@ defmodule Liquid.Parse do
   end
 
   def parse_new(%Block{name: :document} = block, [], accum, %Template{} = template) do
-    { %{ block | nodelist: accum }, template }
+    { %{ block | nodelist: Enum.reverse(accum) }, template }
   end
 
   def parse_new(%Block{name: :comment}=block, [h|t], accum, %Template{}=template) do
     case h do
       %Block{name: :comment, end_marker: true} ->
-        { %{ block | nodelist: accum }, t, template }
+        { %{ block | nodelist: Enum.reverse(accum) }, t, template }
       %Block{end_marker: true} ->
         raise "Unmatched block close: #{h}"
       h ->
@@ -44,7 +44,7 @@ defmodule Liquid.Parse do
   def parse_new(%Block{} = block, [h|t], accum, %Template{}=template) do
     case h do
       %Block{end_marker: true} ->
-        { %{ block | nodelist: accum }, t, template }
+        { %{ block | nodelist: Enum.reverse(accum) }, t, template }
       _ ->
         { result, rest, template } = parse_node_new(h, t, template)
         parse_new(block, rest, [result] ++ accum, template)

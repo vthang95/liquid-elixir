@@ -8,7 +8,7 @@ defmodule Liquid.Tag do
   def create(nil), do: nil
 
   def create(name, arguments) do
-    %Liquid.Tag{name: name, markup: arguments}
+    %Liquid.Tag{name: name, markup: arguments |> IO.inspect(label: "arguments") |> to_string()}
   end
 
 end
