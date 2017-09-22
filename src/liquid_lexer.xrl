@@ -19,6 +19,8 @@ Rules.
 \|                : {token, {'|', TokenLine}}.
 ,                 : {token, {',', TokenLine}}.
 :                 : {token, {':', TokenLine}}.
+\'                : {token, {'\'', TokenLine}}.
+\"                : {token, {'"', TokenLine}}.
 {STRING1}         : {token, {single_quoted_string, TokenLine, dequote(TokenChars, TokenLen)}}.
 {STRING2}         : {token, {double_quoted_string, TokenLine, dequote(TokenChars, TokenLen)}}.
 {ANYTHING}        : {token, {string, TokenLine, TokenChars}}.

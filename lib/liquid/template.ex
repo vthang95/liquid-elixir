@@ -48,8 +48,10 @@ defmodule Liquid.Template do
   """
   @spec parse(String.t, map) :: Liquid.Template
   def parse(value, presets \\ %{})
-
-  def parse(value, presets) do
+#  def parse(<<markup::binary>>, presets) do
+#    Liquid.Parse.parse(markup, %Template{presets: presets})
+#  end
+  def parse(value, presets) when is_binary(value) do
     {:ok, lex, _} = :liquid_lexer.string(value |> String.to_charlist())
     {:ok, ast} = :liquid_parser.parse(lex)
     ast
@@ -60,6 +62,11 @@ defmodule Liquid.Template do
 
   @spec parse(nil, map) :: Liquid.Template
   def parse(nil, presets) do
+
     Liquid.Parse.parse("", %Template{presets: presets})
   end
+
+
+
+
 end
