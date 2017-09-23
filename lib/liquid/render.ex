@@ -29,11 +29,16 @@ defmodule Liquid.Render do
   end
 
   def render(output, {:string, char_list}, %Context{} = context) do
-    { [char_list |> :erlang.list_to_binary()|output] , context }
+    { [char_list|output] , context }
   end
 
   def render(output, text, %Context{}=context) when is_binary(text) do
     { [text|output] , context }
+  end
+
+  def render(output, %Variable{}=v, %Context{version: 2}=context) do
+    rendered = Variable.lookup(v, context)
+    { [rendered|output], context }
   end
 
   def render(output, %Variable{}=v, %Context{}=context) do
@@ -54,7 +59,7 @@ defmodule Liquid.Render do
     end
   end
 
-  def to_text(list, 2), do: list |> List.flatten |> Enum.join
+  def to_text(list, 2), do: list |> Enum.reverse |> List.flatten |> Enum.join
   def to_text(list), do: list |> List.flatten |> Enum.reverse |> Enum.join
 
   defp join_list(input) when is_list(input),
