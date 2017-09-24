@@ -25,7 +25,7 @@ defmodule Liquid.Variable do
     Map.merge(variable, parsed)
   end
 
-  def create(nil), do: nil
+  def create(nil), do: ""
 
   @doc """
   Assigns context to variable and than applies all filters
