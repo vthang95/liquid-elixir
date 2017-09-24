@@ -45,9 +45,7 @@ defmodule BasicBench do
   bench "Loop list lexer" do
     assigns = %{"array" => @list}
     markup = "{%for item in array %}{{item}}{%endfor%}"
-    {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
-    {:ok, ast} = :liquid_parser.parse(lex)
-    template = Liquid.Template.parse_new(ast)
+    template = Liquid.Template.parse_new(markup)
     { :ok, _rendered, _ } = Template.render(template, assigns, version: 2)
   end
 
@@ -98,10 +96,8 @@ defmodule BasicBench do
     </body>
     </html>
     """
-    {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
-    {:ok, ast} = :liquid_parser.parse(lex)
-    template = Liquid.Template.parse_new(ast)
-    Liquid.Template.render(template, %{"array" => @list}, version: 2)
+    template = Liquid.Template.parse_new(markup)
+    Liquid.Template.render(template, assigns, version: 2)
   end
 
   bench "old liquid render just parse" do
@@ -117,9 +113,7 @@ defmodule BasicBench do
 
   bench "lexer parse most simplest item" do
     markup = "simple variable {{ hallo }}"
-    {:ok, lex, _} = :liquid_lexer.string(markup |> String.to_charlist())
-    {:ok, ast} = :liquid_parser.parse(lex)
-    template = Liquid.Template.parse_new(ast)
+    template = Liquid.Template.parse_new(markup)
     Liquid.Template.render(template, %{"hallo" => "hoi iedereen"}, version: 2)
   end
 end
