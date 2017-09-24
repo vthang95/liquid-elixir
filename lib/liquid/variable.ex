@@ -84,8 +84,8 @@ defmodule Liquid.Variable do
     [filter, args]
   end
 
-  def parse([head]) do
-    [parse(head)]
+  def parse([]) do
+    []
   end
 
   def parse([head|tail]) do
