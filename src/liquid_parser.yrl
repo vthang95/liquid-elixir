@@ -36,7 +36,7 @@ filter -> variable maybe_whitespace ':' maybe_whitespace args : {'$1','$5'}.
 args -> arg maybe_whitespace : ['$1'].
 args -> arg maybe_whitespace ',' maybe_whitespace args : ['$1'|'$5'].
 
-arg -> variable : '$1'.
+arg -> variable : erlang:list_to_binary('$1').
 
 variable -> string : trim(unwrap('$1')).
 variable -> single_quoted_string : trim(unwrap('$1')).
