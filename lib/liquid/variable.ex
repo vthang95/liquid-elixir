@@ -19,6 +19,7 @@ defmodule Liquid.Variable do
 
   def create({name, filters}) do
     name = to_string(name)
+    filters = filters |> parse() |> Enum.reverse()
     variable = %Liquid.Variable{name: name, filters: filters}
     parsed = Liquid.Appointer.parse_name(name)
     Map.merge(variable, parsed)
@@ -68,9 +69,21 @@ defmodule Liquid.Variable do
         |> List.flatten
         |> Liquid.List.even_elements
 
-      [String.to_atom(filter), args]
+      [String.to_existing_atom(filter), args]
     end
     [name|filters]
+  end
+
+  def parse({filter, args}) do
+    [filter |> :erlang.list_to_binary |> String.to_existing_atom(), args]
+  end
+
+  def parse([head]) do
+    [parse(head)]
+  end
+
+  def parse([head|tail]) do
+    [parse(head)|parse(tail)]
   end
 
 end
