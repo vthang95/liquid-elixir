@@ -33,7 +33,7 @@ defmodule Liquid.Parse do
           # Ignore undefined tags inside comments
           RuntimeError -> { h, t, template }
         end
-        parse(block, rest, [result] ++ accum, template)
+        parse_new(block, rest, [result] ++ accum, template)
     end
   end
 
