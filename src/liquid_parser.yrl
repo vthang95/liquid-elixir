@@ -9,7 +9,7 @@ Terminals
 
 Rootsymbol liquid.
 
-Nonassoc 100 string single_quoted_string double_quoted_string '|' ':' ',' whitespace '\'' '"'.
+Nonassoc 100 string single_quoted_string double_quoted_string '|' ':' ',' '\'' '"' whitespace.
 
 liquid -> elements : ['$1'].
 
@@ -21,7 +21,7 @@ element -> tags                     : ['Elixir.Liquid.Node':create('$1')].
 element -> strings_with_whitespace  : [erlang:list_to_binary('$1')].
 
 tags -> '{%' maybe_whitespace cleaned_string maybe_whitespace '%}' : {get_name('$3'), get_rest('$3')}.
-tags -> '{%' maybe_whitespace cleaned_string maybe_whitespace strings maybe_whitespace '%}' : {get_name('$3'), get_rest('$3') ++ '$5'}.
+tags -> '{%' maybe_whitespace cleaned_string maybe_whitespace strings_with_whitespace '%}' : {get_name('$3'), get_rest('$3') ++ '$5'}.
 
 object -> '{{' '}}' : nil.
 object -> '{{' maybe_whitespace variable maybe_whitespace '}}' : {'$3', []}.
