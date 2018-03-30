@@ -4,7 +4,9 @@ defmodule Liquid.Variable do
 
   """
   defstruct name: nil, literal: nil, filters: [], parts: []
-  alias Liquid.{Filters, Variable, Context}
+  alias Liquid.{Filters, Variable, Context, ParserSwitching, Parser}
+
+  @behaviour Parser
 
   @doc """
     resolves data from `Liquid.Variable.parse/1` and creates a variable struct
@@ -38,11 +40,17 @@ defmodule Liquid.Variable do
   defp apply_global_filter(input, %Context{}=context),
    do: input |> context.global_filter.()
 
-
   @doc """
   Parses the markup to a list of filters
   """
   def parse(markup) when is_binary(markup) do
+    ParserSwitching.parse_with_selected_parser(markup, __MODULE__)
+  end
+
+  @doc """
+  Implementation of lax Parser behaviour
+  """
+  def lax(markup) when is_binary(markup) do
     [name|filters] = if markup != "" do
       Liquid.filter_parser
         |> Regex.scan(markup)
@@ -62,6 +70,14 @@ defmodule Liquid.Variable do
       [String.to_atom(filter), args]
     end
     [name|filters]
+  end
+
+  @doc """
+  Implementation of strict Parser behaviour
+  """
+  def strict(markup) when is_binary(markup) do
+    # TODO: Implement strict parser
+    lax(markup)
   end
 
 end

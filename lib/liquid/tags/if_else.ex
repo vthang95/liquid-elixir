@@ -9,11 +9,9 @@ defmodule Liquid.Else do
 end
 
 defmodule Liquid.IfElse do
-  alias Liquid.Condition
-  alias Liquid.Render
-  alias Liquid.Block
-  alias Liquid.Tag
-  alias Liquid.Template
+  alias Liquid.{Block, Condition, ParserSwitching, Parser, Render, Tag, Template}
+
+  @behaviour Parser
 
   def syntax, do: ~r/(#{Liquid.quoted_fragment})\s*([=!<>a-z_]+)?\s*(#{Liquid.quoted_fragment})?/
   def expressions_and_operators do
@@ -21,6 +19,13 @@ defmodule Liquid.IfElse do
   end
 
   def parse(%Block{}=block, %Template{}=t) do
+    ParserSwitching.parse_with_selected_parser(block, t, __MODULE__)
+  end
+
+  @doc """
+  Implementation of lax Parser behaviour
+  """
+  def lax(%Block{}=block, %Template{}=t) do
     block = parse_conditions(block)
     case Block.split(block, [:else, :elsif]) do
       { true_block, [%Tag{name: :elsif, markup: markup}|elsif_block] } ->
@@ -33,6 +38,14 @@ defmodule Liquid.IfElse do
       { _, [] } ->
         { %{block | blank: Blank.blank?(block.nodelist)}, t }
     end
+  end
+
+  @doc """
+  Implementation of strict Parser behaviour
+  """
+  def strict(%Block{}=block, %Template{}=t) do
+    # TODO: Implement strict parser
+    lax(block, t)
   end
 
   def render(output, %Tag{}, context) do
