@@ -5,21 +5,38 @@ defmodule Liquid.RangeLookup do
   alias Liquid.Variable
   alias Liquid.Context
 
-  def parse(%RangeLookup{range_start: %Variable{} = range_start, range_end: %Variable{} = range_end}, %Context{} = context) do
-    left = range_start |> Variable.lookup(context) |> valid_range_value
-    right = range_end |> Variable.lookup(context) |> valid_range_value(left)
+  @doc """
+  Parses ranges
+  """
+  @spec parse(%RangeLookup{}, %Context{}) :: list()
+  def parse(
+        %RangeLookup{range_start: %Variable{} = range_start, range_end: %Variable{} = range_end},
+        %Context{} = context
+      ) do
+    {rendered_left, _} = Variable.lookup(range_start, context)
+    {rendered_right, _} = Variable.lookup(range_end, context)
+    left = valid_range_value(rendered_left)
+    right = valid_range_value(rendered_right, left)
 
     Enum.to_list(left..right)
   end
 
-  def parse(%RangeLookup{range_start: range_start, range_end: %Variable{} = range_end}, %Context{} = context) do
-    right = range_end |> Variable.lookup(context) |> valid_range_value(range_start)
+  def parse(
+        %RangeLookup{range_start: range_start, range_end: %Variable{} = range_end},
+        %Context{} = context
+      ) do
+    {rendered_right, _} = Variable.lookup(range_end, context)
+    right = valid_range_value(rendered_right, range_start)
 
     Enum.to_list(range_start..right)
   end
 
-  def parse(%RangeLookup{range_start: %Variable{} = range_start, range_end: range_end}, %Context{} = context) do
-    left = range_start |> Variable.lookup(context) |> valid_range_value
+  def parse(
+        %RangeLookup{range_start: %Variable{} = range_start, range_end: range_end},
+        %Context{} = context
+      ) do
+    {rendered_left, _} = Variable.lookup(range_start, context)
+    left = valid_range_value(rendered_left)
 
     Enum.to_list(left..range_end)
   end

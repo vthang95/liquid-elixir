@@ -27,9 +27,9 @@ defmodule Liquid.Render do
     { [text|output] , context }
   end
 
-  def render(output, %Variable{}=v, %Context{}=context) do
-    rendered = Variable.lookup(v, context) |> join_list
-    { [rendered|output], context }
+  def render(output, %Variable{} = variable, %Context{} = context) do
+    {rendered, context} = Variable.lookup(variable, context)
+    {[join_list(rendered) | output], context}
   end
 
   def render(output, %Tag{name: name}=tag, %Context{}=context) do
