@@ -24,8 +24,8 @@ defmodule Liquid.Parse do
     %{ template | root: root }
   end
 
-  def parse(%Block{name: :document}=block, [], accum, %Template{}=template) do
-    { %{ block | nodelist: accum }, template }
+  def parse(%Block{name: :document} = block, [], accum, %Template{} = template) do
+    unless nodelist_invalid?(block, accum), do: {%{block | nodelist: accum}, template}
   end
 
   def parse(%Block{name: :comment}=block, [h|t], accum, %Template{}=template) do
@@ -51,14 +51,36 @@ defmodule Liquid.Parse do
 
   def parse(%Block{name: name}=block, [h|t], accum, %Template{}=template) do
     endblock = "end" <> to_string(name)
+
     cond do
       Regex.match?(~r/{%\s*#{endblock}\s*%}/, h) ->
-        { %{ block | nodelist: accum }, t, template }
+        unless nodelist_invalid?(block, accum), do: {%{block | nodelist: accum}, t, template}
+
       Regex.match?(~r/{%\send.*?\s*$}/, h) ->
         raise "Unmatched block close: #{h}"
+
       true ->
         { result, rest, template } = parse_node(h, t, template)
         parse(block, rest, accum ++ [result], template)
+    end
+  end
+
+  defp invalid_expression?(expression) when is_binary(expression) do
+    Regex.match?(Liquid.invalid_expression(), expression)
+  end
+
+  defp invalid_expression?(_), do: false
+
+  defp nodelist_invalid?(block, nodelist) do
+    case block.strict do
+      true ->
+        if Enum.any?(nodelist, &invalid_expression?(&1)) do
+          raise Liquid.SyntaxError,
+            message: "no match delimiters in #{block.name}: #{block.markup}"
+        end
+
+      false ->
+        false
     end
   end
 

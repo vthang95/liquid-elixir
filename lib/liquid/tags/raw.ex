@@ -12,7 +12,7 @@ defmodule Liquid.Raw do
       [ extra_data, endblock | _ ] = regex_result |> List.flatten
       if block_delimiter == endblock do
         extra_accum = (accum ++ [extra_data])
-        block = %{ block | nodelist: extra_accum |> Enum.filter(&(&1 != "")) }
+        block = %{ block | strict: false, nodelist: extra_accum |> Enum.filter(&(&1 != "")) }
         { block, t, template }
       else
         if length(t) > 0 do
