@@ -1,15 +1,5 @@
 defmodule Liquid.Block do
-  @moduledoc "A module to define Block struct of tags, variables used by parse"
-
-  defstruct name: nil,
-            markup: nil,
-            condition: nil,
-            parts: [],
-            iterator: [],
-            nodelist: [],
-            elselist: [],
-            blank: false,
-            strict: true
+  defstruct name: nil, markup: nil, condition: nil, parts: [], iterator: [], nodelist: [], elselist: [], blank: false, strict: true
 
   alias Liquid.Tag, as: Tag
   alias Liquid.Block, as: Block

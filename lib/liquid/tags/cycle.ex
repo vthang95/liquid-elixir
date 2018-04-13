@@ -20,7 +20,6 @@ defmodule Liquid.Cycle do
   @doc """
   Returns a corresponding cycle value and increments the cycle counter
   """
-  @spec render(list(), %Tag{}, %Context{}) :: {list(), %Context{}}
   def render(output, %Tag{parts: [name | values]}, %Context{} = context) do
     {name, context} = Variable.lookup(%Variable{parts: [], literal: name}, context)
     name = to_string(name) <> "_liquid_cycle"

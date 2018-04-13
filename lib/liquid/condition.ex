@@ -1,64 +1,59 @@
 defmodule Liquid.Condition do
-  @moduledoc """
-  Handles liquid conditional operators and its variables (left and right side of conditionals)
-  """
+  defstruct left: nil, operator: nil, right: nil,
+              child_operator: nil, child_condition: nil
 
-  defstruct left: nil, operator: nil, right: nil, child_operator: nil, child_condition: nil
+  alias Liquid.Context, as: Context
+  alias Liquid.Variable, as: Variable
+  alias Liquid.Condition, as: Cond
+  alias Liquid.Variable, as: Vars
 
-  alias Liquid.{Condition, Context, Variable}
-
-  @doc "Creates a list of conditional and vars including positioning of each element"
-  def create([h | t]) do
+  def create([h|t]) do
     head = create(h)
     create(head, t)
   end
 
   def create(<<left::binary>>) do
-    left = Variable.create(left)
-    %Condition{left: left}
+    left = Vars.create(left)
+    %Cond{left: left}
   end
 
-  def create({<<left::binary>>, operator, <<right::binary>>}) do
-    create({left |> Variable.create(), operator, right |> Variable.create()})
+  def create({ <<left::binary>>, operator, <<right::binary>> }) do
+    create({ left |> Vars.create, operator, right |> Vars.create})
   end
 
-  def create({%Variable{} = left, operator, <<right::binary>>}) do
-    create({left, operator, right |> Variable.create()})
+  def create({ %Variable{}=left, operator, <<right::binary>> }) do
+    create({ left, operator, right |> Vars.create})
   end
 
-  def create({<<left::binary>>, operator, %Variable{} = right}) do
-    create({left |> Variable.create(), operator, right})
+  def create({ <<left::binary>>, operator, %Variable{}=right }) do
+    create({ left |> Vars.create, operator, right })
   end
 
   def create({ %Variable{}=left, operator, %Variable{}=right }) do
     operator = String.to_atom(operator)
-    %Condition{left: left, operator: operator, right: right}
+    %Cond{left: left, operator: operator, right: right}
   end
 
   def create(condition, []), do: condition
-
-  def create(condition, [join, right | _]) when join == "and" or join == "or" do
+  def create(condition, [join, right|_]) when join == "and" or join == "or" do
     right = create(right)
     join  = join |> String.trim |> String.to_atom
     join(join, condition, right)
   end
 
-  def join(operator, condition, {_, _, _} = right), do: join(operator, condition, create(right))
-
-  def join(operator, condition, %Condition{} = right) do
+  def join(operator, condition, { _, _, _ }=right), do: join(operator, condition, right |> create)
+  def join(operator, condition, %Cond{}=right) do
     %{right | child_condition: condition, child_operator: operator}
   end
 
-  @doc "Evaluates conditions due a given context"
-  def evaluate(%Condition{} = condition), do: evaluate(condition, %Context{})
-
-  def evaluate(%Condition{left: left, right: nil} = condition, %Context{} = context) do
-    {current, context} = Variable.lookup(left, context)
-    eval_child(current, condition.child_operator, condition.child_condition, context)
+  def evaluate(%Cond{}=condition), do: evaluate(condition, %Context{})
+  def evaluate(%Cond{left: left, right: nil}=condition, %Context{}=context) do
+    {current, context} = Vars.lookup(left, context)
+    eval_child(!!current, condition.child_operator, condition.child_condition, context)
   end
 
   def evaluate(
-        %Condition{left: left, right: right, operator: operator} = condition,
+        %Cond{left: left, right: right, operator: operator} = condition,
         %Context{} = context
       ) do
     {left, _} = Variable.lookup(left, context)

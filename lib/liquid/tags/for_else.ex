@@ -91,10 +91,6 @@ defmodule Liquid.ForElse do
     end)
   end
 
-  @doc """
-  Implements 'For' render operations
-  """
-  @spec render(list(), %Block{}, %Context{}) :: {list(), %Block{}, %Context{}}
   def render(output, %Block{iterator: it} = block, %Context{} = context) do
     {list, context} = parse_collection(it.collection, context)
     list = if is_binary(list) and list != "", do: [list], else: list
@@ -164,12 +160,7 @@ defmodule Liquid.ForElse do
   defp lookup_limit(%Iterator{limit: limit}, %Context{}=context),
    do: Variable.lookup(limit, context)
 
-  defp lookup_offset(
-         %Iterator{offset: %Variable{name: "continue"}, name: name},
-         %Context{
-           offsets: offsets
-         } = context
-       ) do
+  defp lookup_offset(%Iterator{offset: %Variable{name: "continue"}, name: name}, %Context{offsets: offsets} = context) do
     {Map.get(offsets, name, 0), context}
   end
 
