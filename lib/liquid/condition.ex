@@ -86,6 +86,8 @@ defmodule Liquid.Condition do
       :!= -> left != right
       :<> -> left != right
       :contains -> contains(left, right)
+      _ -> raise Liquid.SyntaxError,
+        message: "Unexpected character in '#{left} #{operator} #{right}'"
     end
   end
 

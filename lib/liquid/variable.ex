@@ -11,9 +11,12 @@ defmodule Liquid.Variable do
   """
   def create(markup) when is_binary(markup) do
     [name|filters] = markup |> parse
-    name = name |> String.trim
+    name = String.trim(name)
     variable = %Liquid.Variable{name: name, filters: filters}
     parsed = Liquid.Appointer.parse_name(name)
+    if String.contains?(name, "%") do
+      raise Liquid.SyntaxError, message: "Invalid variable name"
+    end
     Map.merge(variable, parsed)
   end
 
@@ -61,25 +64,37 @@ defmodule Liquid.Variable do
   Parses the markup to a list of filters
   """
   def parse(markup) when is_binary(markup) do
-    [name|filters] = if markup != "" do
-      Liquid.filter_parser
+    parsed_variable =
+      if markup != "" do
+        Liquid.filter_parser()
         |> Regex.scan(markup)
-        |> List.flatten
-        |> Enum.filter(&(&1 != "|"))
+        |> List.flatten()
         |> Enum.map(&String.trim/1)
       else
         [""]
       end
-    filters = for markup <- filters do
-      [_, filter] = ~r/\s*(\w+)/ |> Regex.scan(markup) |> hd
-      args = Liquid.filter_arguments
+
+    if hd(parsed_variable) == "|" or hd(Enum.reverse(parsed_variable)) == "|" do
+      raise Liquid.SyntaxError, message: "You cannot use an empty filter"
+    end
+
+    [name | filters] = Enum.filter(parsed_variable, &(&1 != "|"))
+
+    filters = parse_filters(filters)
+    [name | filters]
+  end
+
+  defp parse_filters(filters) do
+    for markup <- filters do
+      [_, filter] = ~r/\s*(\w+)/ |> Regex.scan(markup) |> hd()
+
+      args =
+        Liquid.filter_arguments()
         |> Regex.scan(markup)
-        |> List.flatten
-        |> Liquid.List.even_elements
+        |> List.flatten()
+        |> Liquid.List.even_elements()
 
       [String.to_atom(filter), args]
     end
-    [name|filters]
   end
-
 end
