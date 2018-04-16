@@ -63,13 +63,13 @@ defmodule Liquid.TableRow do
   Iterates through pre-set data and appends it to rendered output list
   Adds the HTML table rows and cols depending on the initial `cols` parameter
   """
-  @spec render(list, Liquid.Block, Liquid.Context) :: {list, Liquid.Context}
-  def render(output, %Block{iterator: it}=block, %Context{}=context) do
-    list = parse_collection(it.collection, context)
+  @spec render(list(), %Block{}, %Context{}) :: {list(), %Context{}}
+  def render(output, %Block{iterator: it} = block, %Context{} = context) do
+    {list, context} = parse_collection(it.collection, context)
     list = if is_binary(list) and list != "", do: [list], else: list
     if is_list(list) do
-      limit  = lookup_limit(it, context)
-      offset = lookup_offset(it, context)
+      {limit, context} = lookup_limit(it, context)
+      {offset, context} = lookup_offset(it, context)
       {new_output, context} = each([], [make_ref(), limit, offset], list, block, context)
       {["</tr>\n" | [new_output | ["<tr class=\"row1\">\n"]]] ++ output, context}
     else
@@ -82,13 +82,13 @@ defmodule Liquid.TableRow do
   end
 
 
-  defp parse_collection(list, _context) when is_list(list), do: list
+  defp parse_collection(list, context) when is_list(list), do: {list, context}
 
   defp parse_collection(%Variable{}=variable, context),
    do: Variable.lookup(variable, context)
 
-  defp parse_collection(%RangeLookup{}=range, context),
-   do: RangeLookup.parse(range, context)
+  defp parse_collection(%RangeLookup{} = range, context),
+    do: {RangeLookup.parse(range, context), context}
 
 
   defp each(output, _, [], %Block{}=block, %Context{}=context),
@@ -131,7 +131,8 @@ defmodule Liquid.TableRow do
 
 
   defp remember_limit(%Block{iterator: it}, context) do
-    limit = lookup_limit(it, context) || 0
+    {rendered, context} = lookup_limit(it, context)
+    limit = rendered || 0
     remembered = context.offsets[it.name] || 0
     %{context | offsets: context.offsets |> Map.put(it.name, remembered + limit)}
   end
@@ -146,8 +147,8 @@ defmodule Liquid.TableRow do
   defp lookup_limit(%Iterator{limit: limit}, %Context{}=context),
    do: Variable.lookup(limit, context)
 
-  defp lookup_offset(%Iterator{offset: %Variable{name: "continue"}}=it, %Context{}=context),
-   do: context.offsets[it.name] || 0
+  defp lookup_offset(%Iterator{offset: %Variable{name: "continue"}} = it, %Context{} = context),
+    do: {context.offsets[it.name] || 0, context}
 
   defp lookup_offset(%Iterator{offset: offset}, %Context{}=context),
    do: Variable.lookup(offset, context)

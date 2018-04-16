@@ -48,15 +48,18 @@ defmodule Liquid.Condition do
 
   def evaluate(%Cond{}=condition), do: evaluate(condition, %Context{})
   def evaluate(%Cond{left: left, right: nil}=condition, %Context{}=context) do
-    current = Vars.lookup(left, context)
+    {current, context} = Vars.lookup(left, context)
     eval_child(!!current, condition.child_operator, condition.child_condition, context)
   end
 
-  def evaluate(%Cond{left: left, right: right, operator: operator}=condition, %Context{}=context) do
-    left = Vars.lookup(left, context)
-    right = Vars.lookup(right, context)
+  def evaluate(
+        %Cond{left: left, right: right, operator: operator} = condition,
+        %Context{} = context
+      ) do
+    {left, _} = Variable.lookup(left, context)
+    {right, _} = Variable.lookup(right, context)
     current = eval_operator(left, operator, right)
-    eval_child(!!current, condition.child_operator, condition.child_condition, context)
+    eval_child(current, condition.child_operator, condition.child_condition, context)
   end
 
   defp eval_child(current, nil, nil, _), do: current
@@ -83,6 +86,8 @@ defmodule Liquid.Condition do
       :!= -> left != right
       :<> -> left != right
       :contains -> contains(left, right)
+      _ -> raise Liquid.SyntaxError,
+        message: "Unexpected character in '#{left} #{operator} #{right}'"
     end
   end
 

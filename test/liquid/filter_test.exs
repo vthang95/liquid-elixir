@@ -71,8 +71,7 @@ defmodule Liquid.FilterTest do
   end
 
   test :slice_on_arrays do
-    input = "foobar" |> String.split("")
-    input = input |> List.delete("")
+    input = "foobar" |> String.split("", trim: true)
     assert ~w{o o b} == Functions.slice(input, 1, 3)
     assert ~w{o o b a r} == Functions.slice(input, 1, 1000)
     assert ~w{} == Functions.slice(input, 1, 0)

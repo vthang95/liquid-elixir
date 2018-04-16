@@ -55,6 +55,7 @@ defmodule Liquid.IfElse do
       case syntax() |> Regex.scan(x) do
         [[_, left, operator, right]] -> { left, operator, right }
         [[_, x]] -> x
+        _ -> raise Liquid.SyntaxError, message: "Check the parenthesis"
       end
     end)
   end
@@ -63,6 +64,7 @@ defmodule Liquid.IfElse do
     expressions = Regex.scan(expressions_and_operators(), markup)
     expressions = expressions |> split_conditions |> Enum.reverse
     condition   = Condition.create(expressions)
+    Condition.evaluate(condition) # Check condition syntax
     %{block | condition: condition }
   end
 end
