@@ -35,13 +35,17 @@ defmodule Liquid.Condition do
 
   def create(condition, []), do: condition
 
-  def create(condition, [join, right | _]) when join == "and" or join == "or" do
+  def create(condition, [join | right]) when join == "and" or join == "or" do
     right = create(right)
     join = join |> String.trim() |> String.to_atom()
     join(join, condition, right)
   end
 
   def join(operator, condition, {_, _, _} = right), do: join(operator, condition, right |> create)
+
+  def join(operator, condition, %Cond{child_condition: %Cond{} = right} = outer_right) do
+    %{outer_right | child_condition: join(operator, condition, right), child_operator: operator}
+  end
 
   def join(operator, condition, %Cond{} = right) do
     %{right | child_condition: condition, child_operator: operator}
