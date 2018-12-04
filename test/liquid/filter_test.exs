@@ -119,6 +119,11 @@ defmodule Liquid.FilterTest do
     assert nil == Functions.url_encode(nil)
   end
 
+  test :url_decode do
+    assert "foo+1@example.com" == Functions.url_decode("foo%2B1%40example.com")
+    assert nil == Functions.url_decode(nil)
+  end
+
   test :truncatewords do
     assert "one two three" == Functions.truncatewords("one two three", 4)
     assert "one two..." == Functions.truncatewords("one two three", 2)
