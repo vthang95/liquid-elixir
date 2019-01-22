@@ -6,7 +6,7 @@ defmodule Liquid.Test.Integration.CasesTest do
   @levels ["simple", "medium", "complex"]
   @data "#{@cases_dir}/db.json"
         |> File.read!()
-        |> Poison.decode!()
+        |> Jason.decode!()
 
   for level <- @levels, test_case <- File.ls!("#{@cases_dir}/#{level}") do
     test "case #{level} - #{test_case}" do

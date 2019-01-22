@@ -30,12 +30,12 @@ defmodule Liquid.Mixfile do
   # { :foobar, "0.1", git: "https://github.com/elixir-lang/foobar.git" }
   defp deps do
     [
-      {:credo, "~> 0.9.0", only: [:dev, :test]},
+      {:credo, "~> 0.9.0 or ~> 1.0", only: [:dev, :test]},
       {:benchee, "~> 0.11", only: :dev},
-      {:benchfella, "~> 0.3.0", only: [:dev, :test]},
+      {:benchfella, "~> 0.3", only: [:dev, :test]},
       {:timex, "~> 3.0"},
       {:excoveralls, "~> 0.8", only: :test},
-      {:poison, "~> 3.1", only: [:dev, :test]},
+      {:jason, "~> 1.1", only: [:dev, :test]},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
