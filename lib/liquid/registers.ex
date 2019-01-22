@@ -27,7 +27,13 @@ defmodule Liquid.Registers do
   end
 
   def lookup(name) when is_binary(name) do
-    name |> String.to_atom() |> lookup
+    try do
+      name
+      |> String.to_existing_atom()
+      |> lookup()
+    rescue
+      ArgumentError -> nil
+    end
   end
 
   def lookup(name) when is_atom(name) do
