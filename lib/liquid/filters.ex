@@ -418,6 +418,12 @@ defmodule Liquid.Filters do
 
     def url_encode(nil), do: nil
 
+    def url_decode(input) when is_binary(input) do
+      input |> URI.decode_www_form()
+    end
+
+    def url_decode(nil), do: nil
+
     def date(input, format \\ "%F %T")
 
     def date(nil, _), do: nil
