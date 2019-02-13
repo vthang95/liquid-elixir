@@ -1,0 +1,360 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Appointer	lib/liquid/appointer.ex	/^defmodule Liquid.Appointer do$/;"	m
+Atomizer	lib/liquid.ex	/^  defmodule Atomizer do$/;"	m
+BasicBench	bench/basic_bench.exs	/^defmodule BasicBench do$/;"	m
+Blank	lib/protocols/blank.ex	/^defimpl Blank, for: List do$/;"	i
+Blank	lib/protocols/blank.ex	/^defprotocol Blank do$/;"	p
+BlankFileSystem	lib/liquid/file_system.ex	/^defmodule Liquid.BlankFileSystem do$/;"	m
+Block	lib/liquid/block.ex	/^defmodule Liquid.Block do$/;"	m
+Condition	lib/liquid/condition.ex	/^defmodule Liquid.Condition do$/;"	m
+Context	lib/liquid/context.ex	/^defmodule Liquid.Context do$/;"	m
+Expression	lib/liquid/expression.ex	/^defmodule Liquid.Expression do$/;"	m
+FileSystem	lib/liquid/file_system.ex	/^defmodule Liquid.FileSystem do$/;"	m
+FileSystemError	lib/errors/errors.ex	/^defmodule Liquid.FileSystemError do$/;"	m
+Filters	lib/liquid/filters.ex	/^defmodule Liquid.Filters do$/;"	m
+Functions	lib/liquid/filters.ex	/^  defmodule Functions do$/;"	m
+HTML	lib/liquid/utils.ex	/^defmodule Liquid.HTML do$/;"	m
+Include	lib/liquid/include.ex	/^defmodule Liquid.Include do$/;"	m
+Liquid	lib/liquid.ex	/^defmodule Liquid do$/;"	m
+List	lib/liquid.ex	/^  defmodule List do$/;"	m
+LocalFileSystem	lib/liquid/file_system.ex	/^defmodule Liquid.LocalFileSystem do$/;"	m
+Matcher	lib/protocols/matcher.ex	/^defimpl Liquid.Matcher, for: Any do$/;"	i
+Matcher	lib/protocols/matcher.ex	/^defimpl Liquid.Matcher, for: Liquid.Context do$/;"	i
+Matcher	lib/protocols/matcher.ex	/^defimpl Liquid.Matcher, for: List do$/;"	i
+Matcher	lib/protocols/matcher.ex	/^defimpl Liquid.Matcher, for: Map do$/;"	i
+Matcher	lib/protocols/matcher.ex	/^defprotocol Liquid.Matcher do$/;"	p
+MinusOneTag	bench/basic_bench.exs	/^  defmodule MinusOneTag do$/;"	m
+Mixfile	mix.exs	/^defmodule Liquid.Mixfile do$/;"	m
+MyFilter	bench/basic_bench.exs	/^  defmodule MyFilter do$/;"	m
+MyFilterTwo	bench/basic_bench.exs	/^  defmodule MyFilterTwo do$/;"	m
+Parse	lib/liquid/parse.ex	/^defmodule Liquid.Parse do$/;"	m
+RangeLookup	lib/liquid/range_lookup.ex	/^defmodule Liquid.RangeLookup do$/;"	m
+Registers	lib/liquid/registers.ex	/^defmodule Liquid.Registers do$/;"	m
+Render	lib/liquid/render.ex	/^defmodule Liquid.Render do$/;"	m
+Supervisor	lib/liquid/supervisor.ex	/^defmodule Liquid.Supervisor do$/;"	m
+SyntaxError	lib/errors/errors.ex	/^defmodule Liquid.SyntaxError do$/;"	m
+Tag	lib/liquid/tag.ex	/^defmodule Liquid.Tag do$/;"	m
+Template	lib/liquid/template.ex	/^defmodule Liquid.Template do$/;"	m
+Utils	lib/liquid/utils.ex	/^defmodule Liquid.Utils do$/;"	m
+Variable	lib/liquid/variable.ex	/^defmodule Liquid.Variable do$/;"	m
+abs	lib/liquid/filters.ex	/^    def abs(input) when input < 0, do: -input$/;"	f
+abs	lib/liquid/filters.ex	/^    def abs(input) when is_binary(input), do: input |> to_number |> abs$/;"	f
+abs	lib/liquid/filters.ex	/^    def abs(input), do: input$/;"	f
+add_filter_modules	lib/liquid/filters.ex	/^  def add_filter_modules do$/;"	f
+add_filters	lib/liquid/filters.ex	/^  def add_filters(module) do$/;"	f
+any_starting_tag	lib/liquid.ex	/^  def any_starting_tag, do: "(){{()|(){%()"$/;"	f
+append	lib/liquid/filters.ex	/^    def append(<<string::binary>>, <<operand::binary>>) do$/;"	f
+append	lib/liquid/filters.ex	/^    def append(input, nil), do: input$/;"	f
+append	lib/liquid/filters.ex	/^    def append(string, operand) do$/;"	f
+application	mix.exs	/^  def application do$/;"	f
+apply_function	lib/liquid/filters.ex	/^  defp apply_function(module, name, args) do$/;"	f
+apply_global_filter	lib/liquid/variable.ex	/^  defp apply_global_filter(input, %Context{global_filter: global_filter}),$/;"	f
+apply_global_filter	lib/liquid/variable.ex	/^  defp apply_global_filter(input, %Context{global_filter: nil}), do: input$/;"	f
+assign	lib/liquid/appointer.ex	/^  def assign($/;"	f
+assign	lib/liquid/appointer.ex	/^  def assign(%Variable{literal: literal, parts: [], filters: filters}, context) do$/;"	f
+assign_context	lib/liquid/appointer.ex	/^  defp assign_context([], _), do: []$/;"	f
+assign_context	lib/liquid/appointer.ex	/^  defp assign_context([head | tail], assigns) do$/;"	f
+assign_context	lib/liquid/appointer.ex	/^  defp assign_context(filters, assigns) when assigns == %{}, do: filters$/;"	f
+blank?	lib/protocols/blank.ex	/^  def blank?([]), do: true$/;"	f
+blank?	lib/protocols/blank.ex	/^  def blank?(data)$/;"	f
+blank?	lib/protocols/blank.ex	/^  def blank?(list) do$/;"	f
+build_presets	lib/liquid/include.ex	/^  defp build_presets(%Tag{} = tag, context) do$/;"	f
+build_range	lib/liquid/range_lookup.ex	/^  defp build_range(left, right) do$/;"	f
+build_range	lib/liquid/range_lookup.ex	/^  defp build_range(left, right) when is_integer(left) and is_integer(right) do$/;"	f
+build_range	lib/liquid/range_lookup.ex	/^  defp build_range(left, right) when is_map(left) or is_map(right) do$/;"	f
+capitalize	lib/liquid/filters.ex	/^    def capitalize(input) do$/;"	f
+ceil	lib/liquid/filters.ex	/^    def ceil(input) when is_integer(input), do: input$/;"	f
+ceil	lib/liquid/filters.ex	/^    def ceil(input) when is_number(input) do$/;"	f
+ceil	lib/liquid/filters.ex	/^    def ceil(input), do: input |> to_number |> ceil$/;"	f
+ceil	lib/liquid/filters.ex	/^    def ceil(input, precision) do$/;"	f
+ceil	lib/liquid/filters.ex	/^    def ceil(input, precision) when is_number(precision) do$/;"	f
+clear	lib/liquid/registers.ex	/^  def clear do$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(<<left::binary>>, <<right::binary>>),$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(<<left::binary>>, right) when is_list(right),$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(_, nil), do: false$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(left, <<right::binary>>) when is_list(left),$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(left, right) when is_list(left) and not is_list(right),$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(left, right) when is_list(right) and is_list(left),$/;"	f
+contains	lib/liquid/condition.ex	/^  defp contains(nil, _), do: false$/;"	f
+create	lib/liquid/block.ex	/^  def create(markup) do$/;"	f
+create	lib/liquid/condition.ex	/^  def create(<<left::binary>>) do$/;"	f
+create	lib/liquid/condition.ex	/^  def create([h | t]) do$/;"	f
+create	lib/liquid/condition.ex	/^  def create(condition, []), do: condition$/;"	f
+create	lib/liquid/condition.ex	/^  def create(condition, [join | right]) when join == "and" or join == "or" do$/;"	f
+create	lib/liquid/condition.ex	/^  def create({%Variable{} = left, operator, %Variable{} = right}) do$/;"	f
+create	lib/liquid/condition.ex	/^  def create({%Variable{} = left, operator, <<right::binary>>}) do$/;"	f
+create	lib/liquid/condition.ex	/^  def create({<<left::binary>>, operator, %Variable{} = right}) do$/;"	f
+create	lib/liquid/condition.ex	/^  def create({<<left::binary>>, operator, <<right::binary>>}) do$/;"	f
+create	lib/liquid/tag.ex	/^  def create(markup) do$/;"	f
+create	lib/liquid/variable.ex	/^  def create(markup) when is_binary(markup) do$/;"	f
+date	lib/liquid/filters.ex	/^    def date("now", format), do: Timex.now() |> date(format)$/;"	f
+date	lib/liquid/filters.ex	/^    def date("today", format), do: Timex.now() |> date(format)$/;"	f
+date	lib/liquid/filters.ex	/^    def date(input, format \\\\ "%F %T")$/;"	f
+date	lib/liquid/filters.ex	/^    def date(input, format) do$/;"	f
+date	lib/liquid/filters.ex	/^    def date(input, format) when is_binary(input) do$/;"	f
+date	lib/liquid/filters.ex	/^    def date(input, format) when is_nil(format) or format == "" do$/;"	f
+date	lib/liquid/filters.ex	/^    def date(nil, _), do: nil$/;"	f
+default	lib/liquid/filters.ex	/^    def default(input, _), do: input$/;"	f
+default	lib/liquid/filters.ex	/^    def default(input, default_val \\\\ "")$/;"	f
+default	lib/liquid/filters.ex	/^    def default(input, default_val) when input in [nil, false, '', "", [], {}, %{}],$/;"	f
+deps	mix.exs	/^  defp deps do$/;"	f
+description	mix.exs	/^  defp description do$/;"	f
+divided_by	lib/liquid/filters.ex	/^    def divided_by(input, operand) do$/;"	f
+divided_by	lib/liquid/filters.ex	/^    def divided_by(input, operand) when is_number(input) do$/;"	f
+double_quote	lib/liquid.ex	/^  def double_quote, do: "\\""$/;"	f
+downcase	lib/liquid/filters.ex	/^    def downcase(input) do$/;"	f
+escape	lib/liquid/filters.ex	/^    def escape(input) when is_binary(input) do$/;"	f
+escape_char	lib/liquid/utils.ex	/^    defp escape_char(unquote(match)), do: unquote(insert)$/;"	f
+escape_char	lib/liquid/utils.ex	/^  defp escape_char(char), do: char$/;"	f
+escape_once	lib/liquid/filters.ex	/^    def escape_once(input) when is_binary(input) do$/;"	f
+eval_child	lib/liquid/condition.ex	/^  defp eval_child(current, :and, condition, context) do$/;"	f
+eval_child	lib/liquid/condition.ex	/^  defp eval_child(current, :or, condition, context) do$/;"	f
+eval_child	lib/liquid/condition.ex	/^  defp eval_child(current, nil, nil, _), do: current$/;"	f
+eval_operator	lib/liquid/condition.ex	/^  defp eval_operator([] = left, :!=, :empty?), do: !Enum.empty?(left)$/;"	f
+eval_operator	lib/liquid/condition.ex	/^  defp eval_operator([] = left, :<>, :empty?), do: eval_operator(left, :!==, :empty?)$/;"	f
+eval_operator	lib/liquid/condition.ex	/^  defp eval_operator([] = left, :==, :empty?), do: Enum.empty?(left)$/;"	f
+eval_operator	lib/liquid/condition.ex	/^  defp eval_operator(left, operator, right) do$/;"	f
+eval_operator	lib/liquid/condition.ex	/^  defp eval_operator(left, operator, right)$/;"	f
+evaluate	lib/liquid/condition.ex	/^  def evaluate($/;"	f
+evaluate	lib/liquid/condition.ex	/^  def evaluate(%Cond{left: left, right: nil} = condition, %Context{} = context) do$/;"	f
+evaluate	lib/liquid/condition.ex	/^  def evaluate(%Cond{} = condition), do: evaluate(condition, %Context{})$/;"	f
+even_elements	lib/liquid.ex	/^    def even_elements([]), do: []$/;"	f
+even_elements	lib/liquid.ex	/^    def even_elements([_, h | t]) do$/;"	f
+filter	lib/liquid/filters.ex	/^  def filter([], value), do: value$/;"	f
+filter	lib/liquid/filters.ex	/^  def filter([filter | rest], value) do$/;"	f
+filter_arguments	lib/liquid.ex	/^  def filter_arguments, do: ~r\/(?::|,)\\s*(#{quoted_fragment()})\/$/;"	f
+filter_parser	lib/liquid.ex	/^  def filter_parser, do: ~r\/(?:\\||(?:\\s*(?!(?:\\|))(?:#{quoted_fragment()}|\\S+)\\s*)+)\/$/;"	f
+first	lib/liquid/filters.ex	/^    def first(_), do: nil$/;"	f
+first	lib/liquid/filters.ex	/^    def first(array) when is_list(array), do: array |> List.first()$/;"	f
+floor	lib/liquid/filters.ex	/^    def floor(input) when is_integer(input), do: input$/;"	f
+floor	lib/liquid/filters.ex	/^    def floor(input) when is_number(input), do: input |> trunc$/;"	f
+floor	lib/liquid/filters.ex	/^    def floor(input), do: input |> to_number |> floor$/;"	f
+floor	lib/liquid/filters.ex	/^    def floor(input, precision) do$/;"	f
+floor	lib/liquid/filters.ex	/^    def floor(input, precision) when is_number(precision) do$/;"	f
+full_path	lib/liquid/file_system.ex	/^  def full_path(path) do$/;"	f
+full_path	lib/liquid/file_system.ex	/^  def full_path(root, template_path) do$/;"	f
+get_int_and_counter	lib/liquid/filters.ex	/^    defp get_int_and_counter(input) do$/;"	f
+get_int_and_counter	lib/liquid/filters.ex	/^    defp get_int_and_counter(input) when is_integer(input), do: {input, 0}$/;"	f
+get_int_and_counter	lib/liquid/filters.ex	/^    defp get_int_and_counter(input) when is_number(input) do$/;"	f
+h	lib/liquid/filters.ex	/^    defdelegate h(input), to: __MODULE__, as: :escape$/;"	d
+html_escape	lib/liquid/utils.ex	/^  def html_escape(data) when is_binary(data) do$/;"	f
+html_escape_once	lib/liquid/utils.ex	/^  def html_escape_once(data) when is_binary(data) do$/;"	f
+init	lib/liquid/supervisor.ex	/^  def init(:ok) do$/;"	f
+invalid_expression	lib/liquid.ex	/^  def invalid_expression,$/;"	f
+invalid_expression?	lib/liquid/parse.ex	/^  defp invalid_expression?(_), do: false$/;"	f
+invalid_expression?	lib/liquid/parse.ex	/^  defp invalid_expression?(expression) when is_binary(expression) do$/;"	f
+join	lib/liquid/condition.ex	/^  def join(operator, condition, %Cond{child_condition: %Cond{} = right} = outer_right) do$/;"	f
+join	lib/liquid/condition.ex	/^  def join(operator, condition, %Cond{} = right) do$/;"	f
+join	lib/liquid/condition.ex	/^  def join(operator, condition, {_, _, _} = right), do: join(operator, condition, right |> create)$/;"	f
+join	lib/liquid/filters.ex	/^    def join(array, separator \\\\ " ") do$/;"	f
+join_list	lib/liquid/render.ex	/^  defp join_list(input) when is_list(input), do: input |> List.flatten() |> Enum.join()$/;"	f
+join_list	lib/liquid/render.ex	/^  defp join_list(input), do: input$/;"	f
+last	lib/liquid/filters.ex	/^    def last(_), do: nil$/;"	f
+last	lib/liquid/filters.ex	/^    def last(array) when is_list(array), do: array |> List.last()$/;"	f
+lookup	lib/liquid/file_system.ex	/^  def lookup do$/;"	f
+lookup	lib/liquid/registers.ex	/^  def lookup(_), do: nil$/;"	f
+lookup	lib/liquid/registers.ex	/^  def lookup(_, _), do: nil$/;"	f
+lookup	lib/liquid/registers.ex	/^  def lookup(name) when is_atom(name) do$/;"	f
+lookup	lib/liquid/registers.ex	/^  def lookup(name) when is_binary(name) do$/;"	f
+lookup	lib/liquid/registers.ex	/^  def lookup(name, %{extra_tags: extra_tags}) do$/;"	f
+lookup	lib/liquid/registers.ex	/^  def lookup(name, context) when is_binary(name) do$/;"	f
+lookup	lib/liquid/variable.ex	/^  def lookup(%Variable{} = v, %Context{} = context) do$/;"	f
+lstrip	lib/liquid/filters.ex	/^    def lstrip(<<string::binary>>) do$/;"	f
+map	lib/liquid/filters.ex	/^    def map(_, _), do: ""$/;"	f
+map	lib/liquid/filters.ex	/^    def map(array, key) when is_list(array) do$/;"	f
+match	lib/liquid/appointer.ex	/^  def match(%{assigns: assigns} = context, [key | _] = parts) when is_binary(key) do$/;"	f
+match	lib/liquid/appointer.ex	/^  def match(current, []), do: current$/;"	f
+match	lib/liquid/appointer.ex	/^  def match(current, [name | parts]) when is_binary(name) do$/;"	f
+match	lib/liquid/appointer.ex	/^  def match(current, key) when is_binary(key), do: Map.get(current, key)$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(%{assigns: assigns, presets: presets}, [key | _] = parts) when is_binary(key) do$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(_, _)$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(_current, key) when is_binary(key), do: nil$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, ["size" | _]) when is_binary(current), do: current |> String.length()$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, ["size" | _]), do: current |> Enum.count()$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, ["size" | _]), do: current |> map_size$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, [<<?[, index::binary>> | parts]) do$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, []), do: current$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, [name | parts]) when is_binary(name) do$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, [name | parts]) when is_map(current) and is_binary(name) do$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, key) when is_binary(key), do: current[key]$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(current, key) when is_map(current) and is_binary(key) do$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(nil, _), do: nil$/;"	f
+match	lib/protocols/matcher.ex	/^  def match(true, _), do: nil$/;"	f
+meaning_of_life	bench/basic_bench.exs	/^    def meaning_of_life(_), do: 40$/;"	f
+meaning_of_life	bench/basic_bench.exs	/^    def meaning_of_life(_), do: 42$/;"	f
+minus	lib/liquid/filters.ex	/^    def minus(value, operand) do$/;"	f
+minus	lib/liquid/filters.ex	/^    def minus(value, operand) when is_number(value) and is_number(operand) do$/;"	f
+minus	lib/liquid/filters.ex	/^    def minus(value, operand) when is_number(value) do$/;"	f
+modulo	lib/liquid/filters.ex	/^    def modulo(0, _), do: 0$/;"	f
+modulo	lib/liquid/filters.ex	/^    def modulo(input, operand) do$/;"	f
+modulo	lib/liquid/filters.ex	/^    def modulo(input, operand) when is_number(input) and is_number(operand) and input < 0,$/;"	f
+modulo	lib/liquid/filters.ex	/^    def modulo(input, operand) when is_number(input) and is_number(operand) and input > 0,$/;"	f
+newline_to_br	lib/liquid/filters.ex	/^    def newline_to_br(<<string::binary>>) do$/;"	f
+nodelist_invalid?	lib/liquid/parse.ex	/^  defp nodelist_invalid?(block, nodelist) do$/;"	f
+not_meaning_of_life	bench/basic_bench.exs	/^    def not_meaning_of_life(_), do: 2$/;"	f
+package	mix.exs	/^  defp package do$/;"	f
+parse	bench/basic_bench.exs	/^    def parse(%Tag{}=tag, %Template{}=context) do$/;"	f
+parse	lib/liquid/expression.ex	/^  def parse(markup) do$/;"	f
+parse	lib/liquid/expression.ex	/^  def parse(markup) when markup in @literal_list, do: @literals[markup]$/;"	f
+parse	lib/liquid/include.ex	/^  def parse(%Tag{markup: markup} = tag, %Template{} = template) do$/;"	f
+parse	lib/liquid/parse.ex	/^  def parse("", %Template{} = template) do$/;"	f
+parse	lib/liquid/parse.ex	/^  def parse(%Block{name: :comment} = block, [h | t], accum, %Template{} = template) do$/;"	f
+parse	lib/liquid/parse.ex	/^  def parse(%Block{name: :document} = block, [], accum, %Template{} = template) do$/;"	f
+parse	lib/liquid/parse.ex	/^  def parse(%Block{name: name} = block, [h | t], accum, %Template{} = template) do$/;"	f
+parse	lib/liquid/parse.ex	/^  def parse(%Block{name: name}, [], _, _) do$/;"	f
+parse	lib/liquid/parse.ex	/^  def parse(<<string::binary>>, %Template{} = template) do$/;"	f
+parse	lib/liquid/range_lookup.ex	/^  def parse($/;"	f
+parse	lib/liquid/range_lookup.ex	/^  def parse(left, right) do$/;"	f
+parse	lib/liquid/template.ex	/^  def parse(<<markup::binary>>, presets) do$/;"	f
+parse	lib/liquid/template.ex	/^  def parse(nil, presets) do$/;"	f
+parse	lib/liquid/template.ex	/^  def parse(value, presets \\\\ %{})$/;"	f
+parse	lib/liquid/variable.ex	/^  def parse(markup) when is_binary(markup) do$/;"	f
+parse_attributes	lib/liquid/include.ex	/^  defp parse_attributes(markup) do$/;"	f
+parse_block	lib/liquid/parse.ex	/^  defp parse_block(mod, markup, rest, template) do$/;"	f
+parse_filters	lib/liquid/variable.ex	/^  defp parse_filters(filters) do$/;"	f
+parse_markup	lib/liquid/parse.ex	/^  defp parse_markup(markup, rest, template) do$/;"	f
+parse_name	lib/liquid/appointer.ex	/^  def parse_name(name) do$/;"	f
+parse_node	lib/liquid/parse.ex	/^  defp parse_node(<<name::binary>>, rest, %Template{} = template) do$/;"	f
+parse_tag	lib/liquid/include.ex	/^  defp parse_tag(%Tag{} = tag, parts) do$/;"	f
+parse_tag_name	lib/liquid/parse.ex	/^  defp parse_tag_name(name) do$/;"	f
+parse_tokens	lib/liquid/parse.ex	/^  defp parse_tokens(<<string::binary>>, tag_name) do$/;"	f
+parser	lib/liquid.ex	/^  def parser,$/;"	f
+partial_template_parser	lib/liquid.ex	/^  def partial_template_parser,$/;"	f
+pluralise	lib/liquid/filters.ex	/^    defdelegate pluralise(input, single, plural), to: __MODULE__, as: :pluralize$/;"	d
+pluralize	lib/liquid/filters.ex	/^    def pluralize(1, single, _), do: single$/;"	f
+pluralize	lib/liquid/filters.ex	/^    def pluralize(input, _, plural) when is_number(input), do: plural$/;"	f
+pluralize	lib/liquid/filters.ex	/^    def pluralize(input, single, plural), do: input |> to_number |> pluralize(single, plural)$/;"	f
+plus	lib/liquid/filters.ex	/^    def plus(value, operand) do$/;"	f
+plus	lib/liquid/filters.ex	/^    def plus(value, operand) when is_number(value) and is_number(operand) do$/;"	f
+plus	lib/liquid/filters.ex	/^    def plus(value, operand) when is_number(value) do$/;"	f
+plus_one	bench/basic_bench.exs	/^    def plus_one(input) when is_binary(input) do$/;"	f
+plus_one	bench/basic_bench.exs	/^    def plus_one(input) when is_number(input), do: input + 1$/;"	f
+prepend	lib/liquid/filters.ex	/^    def prepend(<<string::binary>>, <<addition::binary>>) do$/;"	f
+prepend	lib/liquid/filters.ex	/^    def prepend(string, addition) do$/;"	f
+prepend	lib/liquid/filters.ex	/^    def prepend(string, nil), do: string$/;"	f
+process_error	lib/liquid/variable.ex	/^  defp process_error(%Context{template: template} = context, error, message) do$/;"	f
+project	mix.exs	/^  def project do$/;"	f
+quote_matcher	lib/liquid.ex	/^  def quote_matcher, do: ~r\/#{single_quote()}|#{double_quote()}\/$/;"	f
+quoted_fragment	lib/liquid.ex	/^  def quoted_fragment, do: "#{quoted_string()}|(?:[^\\s,\\|'\\"]|#{quoted_string()})+"$/;"	f
+quoted_string	lib/liquid.ex	/^  def quoted_string, do: "\\"[^\\"]*\\"|'[^']*'"$/;"	f
+read_template_file	lib/liquid/file_system.ex	/^  def read_template_file(_root, _name, _context) do$/;"	f
+read_template_file	lib/liquid/file_system.ex	/^  def read_template_file(path, options \\\\ []) do$/;"	f
+register	lib/liquid/file_system.ex	/^  def register(module, path \\\\ "") do$/;"	f
+register	lib/liquid/registers.ex	/^  def register(name, module, type) do$/;"	f
+registers	lib/liquid/context.ex	/^  def registers(context, key) do$/;"	f
+remove	lib/liquid/filters.ex	/^    def remove(<<string::binary>>, <<remove::binary>>) do$/;"	f
+remove_first	lib/liquid/filters.ex	/^    def remove_first(<<string::binary>>, <<remove::binary>>) do$/;"	f
+remove_first	lib/liquid/filters.ex	/^    def remove_first(string, operand) do$/;"	f
+render	bench/basic_bench.exs	/^    def render(_input, tag, context) do$/;"	f
+render	lib/liquid/include.ex	/^  def render(output, %Tag{parts: parts} = tag, %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(%Template{root: root}, %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(output, %Block{name: name} = block, %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(output, %Tag{name: name} = tag, %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(output, %Variable{} = variable, %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(output, [], %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(output, [h | t], %Context{} = context) do$/;"	f
+render	lib/liquid/render.ex	/^  def render(output, text, %Context{} = context) when is_binary(text) do$/;"	f
+render	lib/liquid/template.ex	/^  def render(%Template{} = t, %Context{global_filter: _global_filter} = context, options) do$/;"	f
+render	lib/liquid/template.ex	/^  def render(%Template{} = t, %Context{} = c) do$/;"	f
+render	lib/liquid/template.ex	/^  def render(%Template{} = t, assigns), do: render(t, assigns, [])$/;"	f
+render	lib/liquid/template.ex	/^  def render(%Template{} = t, assigns, options) when is_map(assigns) do$/;"	f
+render	lib/liquid/template.ex	/^  def render(_, _) do$/;"	f
+render	lib/liquid/template.ex	/^  def render(t, c \\\\ %{})$/;"	f
+render_item	lib/liquid/include.ex	/^  defp render_item(output, _key, nil, template, %Context{} = context) do$/;"	f
+render_item	lib/liquid/include.ex	/^  defp render_item(output, key, item, template, %Context{} = context) do$/;"	f
+render_list	lib/liquid/include.ex	/^  defp render_list(output, _, [], _, context) do$/;"	f
+render_list	lib/liquid/include.ex	/^  defp render_list(output, key, [item | rest], template, %Context{} = context) do$/;"	f
+replace	lib/liquid/filters.ex	/^    def replace(<<string::binary>>, <<from::binary>>, <<to::binary>>) do$/;"	f
+replace	lib/liquid/filters.ex	/^    def replace(<<string::binary>>, <<from::binary>>, to) do$/;"	f
+replace	lib/liquid/filters.ex	/^    def replace(<<string::binary>>, from, to) do$/;"	f
+replace	lib/liquid/filters.ex	/^    def replace(string, from, to \\\\ "")$/;"	f
+replace	lib/liquid/filters.ex	/^    def replace(string, from, to) do$/;"	f
+replace_first	lib/liquid/filters.ex	/^    def replace_first(<<string::binary>>, <<from::binary>>, to) do$/;"	f
+replace_first	lib/liquid/filters.ex	/^    def replace_first(string, from, to \\\\ "")$/;"	f
+replace_first	lib/liquid/filters.ex	/^    def replace_first(string, from, to) do$/;"	f
+reverse	lib/liquid/filters.ex	/^    def reverse(array), do: array |> to_iterable |> Enum.reverse()$/;"	f
+round	lib/liquid/filters.ex	/^    def round(input) when is_integer(input), do: input$/;"	f
+round	lib/liquid/filters.ex	/^    def round(input) when is_number(input) do$/;"	f
+round	lib/liquid/filters.ex	/^    def round(input), do: input |> to_number |> round$/;"	f
+round	lib/liquid/filters.ex	/^    def round(input, precision) do$/;"	f
+round	lib/liquid/filters.ex	/^    def round(input, precision) when is_number(precision) do$/;"	f
+rstrip	lib/liquid/filters.ex	/^    def rstrip(<<string::binary>>) do$/;"	f
+single_quote	lib/liquid.ex	/^  def single_quote, do: "'"$/;"	f
+size	lib/liquid/filters.ex	/^    def size(_), do: 0$/;"	f
+size	lib/liquid/filters.ex	/^    def size(input) when is_binary(input) do$/;"	f
+size	lib/liquid/filters.ex	/^    def size(input) when is_list(input) do$/;"	f
+size	lib/liquid/filters.ex	/^    def size(input) when is_tuple(input) do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(<<string::binary>>, 0), do: string$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(<<string::binary>>, from, to) do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(<<string::binary>>, range) do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(<<string::binary>>, range) when range > 0 do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(list, 0) when is_list(list), do: list$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(list, from, to) when is_list(list) do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(list, range) when is_list(list) and range > 0 do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(list, range) when is_list(list) do$/;"	f
+slice	lib/liquid/filters.ex	/^    def slice(nil, _), do: ""$/;"	f
+sort	lib/liquid/filters.ex	/^    def sort(array), do: array |> Enum.sort()$/;"	f
+sort	lib/liquid/filters.ex	/^    def sort(array, _) when is_list(array) do$/;"	f
+sort	lib/liquid/filters.ex	/^    def sort(array, key) when is_list(array) and is_map(hd(array)) do$/;"	f
+split	lib/liquid/block.ex	/^  def split(%Block{nodelist: nodelist}, namelist), do: split(nodelist, namelist)$/;"	f
+split	lib/liquid/block.ex	/^  def split(nodelist, namelist) when is_list(nodelist) do$/;"	f
+split	lib/liquid/block.ex	/^  def split(nodes), do: split(nodes, [:else])$/;"	f
+split	lib/liquid/filters.ex	/^    def split(<<string::binary>>, <<separator::binary>>) do$/;"	f
+split	lib/liquid/filters.ex	/^    def split(nil, _), do: []$/;"	f
+start	lib/liquid.ex	/^  def start do$/;"	f
+start	lib/liquid.ex	/^  def start(_type, _args), do: start()$/;"	f
+start_link	lib/liquid/supervisor.ex	/^  def start_link do$/;"	f
+stop	lib/liquid.ex	/^  def stop, do: {:ok, "stopped"}$/;"	f
+strip	lib/liquid/filters.ex	/^    def strip(<<string::binary>>) do$/;"	f
+strip_html	lib/liquid/filters.ex	/^    def strip_html(input) when is_binary(input) do$/;"	f
+strip_html	lib/liquid/filters.ex	/^    def strip_html(nil), do: ""$/;"	f
+strip_newlines	lib/liquid/filters.ex	/^    def strip_newlines(<<string::binary>>) do$/;"	f
+syntax	lib/liquid/include.ex	/^  def syntax,$/;"	f
+tag_attributes	lib/liquid.ex	/^  def tag_attributes, do: ~r\/(\\w+)\\s*\\:\\s*(#{quoted_fragment()})\/$/;"	f
+tag_end	lib/liquid.ex	/^  def tag_end, do: "%}"$/;"	f
+tag_start	lib/liquid.ex	/^  def tag_start, do: "{%"$/;"	f
+template_parser	lib/liquid.ex	/^  def template_parser, do: ~r\/#{partial_template_parser()}|#{any_starting_tag()}\/ms$/;"	f
+times	lib/liquid/filters.ex	/^    def times(value, operand) do$/;"	f
+times	lib/liquid/filters.ex	/^    def times(value, operand) when is_integer(value) and is_integer(operand) do$/;"	f
+to_existing_atom	lib/liquid.ex	/^    def to_existing_atom(string) do$/;"	f
+to_iterable	lib/liquid/filters.ex	/^    defp to_iterable(input) do$/;"	f
+to_iterable	lib/liquid/filters.ex	/^    defp to_iterable(input) when is_list(input) do$/;"	f
+to_number	lib/liquid/utils.ex	/^  def to_number(input) when is_binary(input) do$/;"	f
+to_number	lib/liquid/utils.ex	/^  def to_number(input) when is_number(input), do: input$/;"	f
+to_number	lib/liquid/utils.ex	/^  def to_number(nil), do: 0$/;"	f
+to_text	lib/liquid/render.ex	/^  def to_text(list), do: list |> List.flatten() |> Enum.reverse() |> Enum.join()$/;"	f
+tokenize	lib/liquid/parse.ex	/^  def tokenize(<<string::binary>>) do$/;"	f
+tokenizer	lib/liquid.ex	/^  def tokenizer,$/;"	f
+truncate	lib/liquid/filters.ex	/^    def truncate(input, l \\\\ 50, truncate_string \\\\ "...")$/;"	f
+truncate	lib/liquid/filters.ex	/^    def truncate(input, l, truncate_string) when is_number(l) do$/;"	f
+truncate	lib/liquid/filters.ex	/^    def truncate(input, l, truncate_string), do: truncate(input, to_number(l), truncate_string)$/;"	f
+truncate	lib/liquid/filters.ex	/^    def truncate(input, l, truncate_string),$/;"	f
+truncate	lib/liquid/filters.ex	/^    def truncate(nil, _, _), do: nil$/;"	f
+truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words \\\\ 15)$/;"	f
+truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words) when is_number(words) and words < 1 do$/;"	f
+truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words) when is_number(words) do$/;"	f
+truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words), do: truncatewords(input, to_number(words))$/;"	f
+truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words),$/;"	f
+truncatewords	lib/liquid/filters.ex	/^    def truncatewords(nil, _), do: nil$/;"	f
+uniq	lib/liquid/filters.ex	/^    def uniq(_), do: raise("Called `uniq` with non-list parameter.")$/;"	f
+uniq	lib/liquid/filters.ex	/^    def uniq(_, _), do: raise("Called `uniq` with non-list parameter.")$/;"	f
+uniq	lib/liquid/filters.ex	/^    def uniq(array) when is_list(array), do: array |> Enum.uniq()$/;"	f
+uniq	lib/liquid/filters.ex	/^    def uniq(array, _) when is_list(array) do$/;"	f
+uniq	lib/liquid/filters.ex	/^    def uniq(array, key) when is_list(array) and is_map(hd(array)) do$/;"	f
+upcase	lib/liquid/filters.ex	/^    def upcase(input) do$/;"	f
+url_decode	lib/liquid/filters.ex	/^    def url_decode(input) when is_binary(input) do$/;"	f
+url_decode	lib/liquid/filters.ex	/^    def url_decode(nil), do: nil$/;"	f
+url_encode	lib/liquid/filters.ex	/^    def url_encode(input) when is_binary(input) do$/;"	f
+url_encode	lib/liquid/filters.ex	/^    def url_encode(nil), do: nil$/;"	f
+valid_range_value	lib/liquid/range_lookup.ex	/^  defp valid_range_value(value, _), do: value$/;"	f
+valid_range_value	lib/liquid/range_lookup.ex	/^  defp valid_range_value(value, fallback \\\\ 0)$/;"	f
+valid_range_value	lib/liquid/range_lookup.ex	/^  defp valid_range_value(value, fallback) when is_binary(value) do$/;"	f
+variable_end	lib/liquid.ex	/^  def variable_end, do: "}}"$/;"	f
+variable_incomplete_end	lib/liquid.ex	/^  def variable_incomplete_end, do: "\\}\\}?"$/;"	f
+variable_parser	lib/liquid.ex	/^  def variable_parser, do: ~r\/\\[[^\\]]+\\]|[\\w\\-]+\/$/;"	f
+variable_start	lib/liquid.ex	/^  def variable_start, do: "{{"$/;"	f
