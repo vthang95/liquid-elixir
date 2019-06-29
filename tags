@@ -311,8 +311,6 @@ start	lib/liquid.ex	/^  def start(_type, _args), do: start()$/;"	f
 start_link	lib/liquid/supervisor.ex	/^  def start_link do$/;"	f
 stop	lib/liquid.ex	/^  def stop, do: {:ok, "stopped"}$/;"	f
 strip	lib/liquid/filters.ex	/^    def strip(<<string::binary>>) do$/;"	f
-strip_html	lib/liquid/filters.ex	/^    def strip_html(input) when is_binary(input) do$/;"	f
-strip_html	lib/liquid/filters.ex	/^    def strip_html(nil), do: ""$/;"	f
 strip_newlines	lib/liquid/filters.ex	/^    def strip_newlines(<<string::binary>>) do$/;"	f
 syntax	lib/liquid/include.ex	/^  def syntax,$/;"	f
 tag_attributes	lib/liquid.ex	/^  def tag_attributes, do: ~r\/(\\w+)\\s*\\:\\s*(#{quoted_fragment()})\/$/;"	f
@@ -332,13 +330,11 @@ tokenize	lib/liquid/parse.ex	/^  def tokenize(<<string::binary>>) do$/;"	f
 tokenizer	lib/liquid.ex	/^  def tokenizer,$/;"	f
 truncate	lib/liquid/filters.ex	/^    def truncate(input, l \\\\ 50, truncate_string \\\\ "...")$/;"	f
 truncate	lib/liquid/filters.ex	/^    def truncate(input, l, truncate_string) when is_number(l) do$/;"	f
-truncate	lib/liquid/filters.ex	/^    def truncate(input, l, truncate_string), do: truncate(input, to_number(l), truncate_string)$/;"	f
 truncate	lib/liquid/filters.ex	/^    def truncate(input, l, truncate_string),$/;"	f
 truncate	lib/liquid/filters.ex	/^    def truncate(nil, _, _), do: nil$/;"	f
 truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words \\\\ 15)$/;"	f
 truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words) when is_number(words) and words < 1 do$/;"	f
 truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words) when is_number(words) do$/;"	f
-truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words), do: truncatewords(input, to_number(words))$/;"	f
 truncatewords	lib/liquid/filters.ex	/^    def truncatewords(input, words),$/;"	f
 truncatewords	lib/liquid/filters.ex	/^    def truncatewords(nil, _), do: nil$/;"	f
 uniq	lib/liquid/filters.ex	/^    def uniq(_), do: raise("Called `uniq` with non-list parameter.")$/;"	f

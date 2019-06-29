@@ -406,16 +406,6 @@ defmodule Liquid.Filters do
       input |> HTML.html_escape_once()
     end
 
-    def strip_html(nil), do: ""
-
-    def strip_html(input) when is_binary(input) do
-      input
-      |> String.replace(~r/<script.*?<\/script>/m, "")
-      |> String.replace(~r/<!--.*?-->/m, "")
-      |> String.replace(~r/<style.*?<\/style>/m, "")
-      |> String.replace(~r/<.*?>/m, "")
-    end
-
     def url_encode(input) when is_binary(input) do
       input |> URI.encode_www_form()
     end
