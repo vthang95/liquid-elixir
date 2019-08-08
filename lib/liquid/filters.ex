@@ -136,8 +136,11 @@ defmodule Liquid.Filters do
         {_, 0} ->
           raise ArithmeticError, message: "divided by 0"
 
-        {input, number_operand} when is_integer(input) ->
+        {input, number_operand} when is_integer(input) and is_integer(number_operand) ->
           (input / number_operand) |> floor
+
+        {input, number_operand} when is_integer(input) and is_float(number_operand) ->
+          input / number_operand
 
         {input, number_operand} ->
           input / number_operand
